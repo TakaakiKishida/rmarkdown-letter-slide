@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Zilla+Slab:300,300i,400,400i,500,500i,700,700i);
 
 /* Create a highlighted class called 'hi'  */
 .hi {
@@ -38,7 +39,7 @@
 }
 .hi-blue {
   font-weight: 600;
-  color: #54778B !important;
+  color: #3b3b9a !important;
 }
 .hi-red {
   font-weight: 600;
@@ -74,7 +75,7 @@
   color: #8AA19E !important;
 }
 .blue {
-  color: #54778B !important;
+  color: #3b3b9a !important;
 }
 .red {
   color: #fb6107 !important;
@@ -84,7 +85,9 @@
 .grey-mid {
   color: #7f7f7f !important;
 }
-/* Grey text */
+.grey-light {
+  color: #d2d2d2 !important;
+}
 .grey-vlight {
   color: #e5e5e5 !important;
 }
@@ -111,6 +114,14 @@
 .st {
   text-decoration: line-through;
 }
+/* Bold */
+.b {
+  font-weight: bold;
+}
+/* Italic */
+.it {
+  font-style: italic;
+}
 /* Fraction */
 .top{
   display:inline-block;
@@ -125,21 +136,21 @@
   background-color: rgba(249, 39, 114, 0.5);
 }
 
-/* Transparent text (helpful for spacing) */
-.tran {
-  opacity: 0 !important;
-}
-
 .bigger {
   font-size: 125%;
 }
-
-.smaller {
-  font-size: 95%;
+.huge{
+  font-size: 150%;
 }
 
-.smallest {
+.small {
+  font-size: 95%;
+}
+.smaller {
   font-size: 85%;
+}
+.smallest {
+  font-size: 75%;
 }
 
 .tiny {
@@ -167,6 +178,11 @@
 .footnote {
   bottom: 1.5em;
   font-size: 70%;
+}
+
+/* Turn off slide numbers */
+.remark-slide-number {
+  /* display: none; */
 }
 
 .dark-slide {
@@ -203,6 +219,8 @@
   background: #f8f8f8;
   border-radius: 3px;
   padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .pseudocode-small {
   font-size: 20px;
@@ -218,7 +236,7 @@
 }
 
 .remark-code {
-  font-size: 70%;
+  font-size: 68%;
 }
 
 .inverse > h2 {
@@ -258,6 +276,84 @@
 }
 .more-right ~ * {
   clear: both;
+}
+
+/* 9/10 left; 1/10 right */
+.left90 {
+  padding-top: 0.7em;
+  float: left;
+  width: 85%;
+}
+.right10 {
+  padding-top: 0.7em;
+  float: right;
+  width: 9%;
+}
+
+/* 95% left; 5% right */
+.left95 {
+  padding-top: 0.7em;
+  float: left;
+  width: 91%;
+}
+.right05 {
+  padding-top: 0.7em;
+  float: right;
+  width: 5%;
+}
+
+/* Format tables */
+table {
+  color: #000000;
+  font-size: 16pt;
+}
+th, td {
+  background-color: #ffffff;
+  /* color: #314f4f; */
+}
+
+/* Extra left padding */
+.pad-left {
+  margin-left: 5%;
+}
+
+/* Extra left padding */
+.big-left {
+  margin-left: 15%;
+  margin-bottom: -0.4em;
+}
+
+/* Attention */
+.attn {
+  font-weight: 500;
+  color: #e64173 !important;
+  font-family: 'Zilla Slab' !important;
+}
+
+/* Note */
+.note {
+  font-weight: 300;
+  font-style: italic;
+  color: #314f4f !important;
+  /* color: #cccccc !important; */
+  font-family: 'Zilla Slab' !important;
+}
+
+/* Question and answer */
+.qa {
+  font-weight: 500;
+  /* color: #314f4f !important; */
+  color: #e64173 !important;
+  font-family: 'Zilla Slab' !important;
+}
+
+/* Example */
+.ex {
+  font-weight: 300;
+  /* color: #314f4f !important; */
+  /* color: #8AA19E !important; */
+  /* color: #bebebe !important; */
+  color: #cccccc !important;
 }
 
 /* Remove orange line */

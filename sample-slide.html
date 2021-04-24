@@ -81,12 +81,9 @@ class: middle, inverse
 # Practice
 
 ---
-
-layout: true
+name: t3
 
 # Title 3
----
-name: t3
 
 ## What is it?
 
@@ -103,6 +100,70 @@ What does that mean?
 - .mono[R] has a vibrant, thriving online community (*e.g.*, [Stack Overflow](https://stackoverflow.com/questions/tagged/r)).
 
 - Plus it's __free__ and __open source__.
+
+---
+
+layout: true
+# Regression and causality
+
+---
+
+First, we need to generate some data.
+
+
+```r
+# Set seed
+set.seed(12345)
+# Set sample size
+n &lt;- 1e4
+
+# Generate data
+ex_df &lt;- tibble(
+  female = rep(c(0, 1), each = n/2),
+  grad = runif(n, min = female/3, max = 1) %&gt;% round(0),
+  wage = 100 - 25 * female + 5 * grad + rnorm(n, sd = 3)
+)
+```
+
+---
+
+Now we can estimate our naïve regression
+
+$$
+`\begin{align}
+  \text{Wage}_i = \alpha + \beta \text{Grad}_i + \varepsilon_i
+\end{align}`
+$$
+
+--
+
+`lm(wage ~ grad, data = ex_df)`
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Coef. &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; S.E. &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Intercept &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 91.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 447.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Graduate &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -6.18 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 
