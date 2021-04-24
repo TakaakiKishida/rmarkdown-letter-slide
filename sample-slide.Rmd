@@ -1,0 +1,155 @@
+---
+title: "Making Slides using .mono[Rmd]"
+subtitle: "Output to html and pdf"
+author: "Your Name"
+date: "April 1, 2021"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: inverse, middle
+
+```{R, setup, include = F}
+library(pacman)
+library(pagedown)
+p_load(
+  broom, tidyverse,
+  latex2exp, ggplot2, ggthemes, ggforce, 
+  viridis, extrafont, gridExtra,
+  kableExtra, snakecase, janitor,
+  data.table, dplyr, estimatr,
+  lubridate, knitr, parallel,
+  lfe, here, magrittr
+)
+
+# Define pink color
+red_pink <- "#e64173"
+turquoise <- "#20B2AA"
+orange <- "#FFA500"
+red <- "#fb6107"
+blue <- "#2b59c3"
+green <- "#8bb174"
+grey_light <- "grey70"
+grey_mid <- "grey50"
+grey_dark <- "grey20"
+purple <- "#6A5ACD"
+slate <- "#314f4f"
+
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 7,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+options(crayon.enabled = F)
+options(knitr.table.format = "html")
+```
+
+```{css, echo = F, eval = F}
+@media print {
+  .has-continuation {
+    display: block !important;
+  }
+}
+```
+
+# Prologue
+
+---
+name: schedule
+
+# Schedule
+
+## Today
+
+- Welcome, check in, [admin](https://github.com/edrubin/EC607S20), and survey
+- Research basics: *Why are we here?* .grey-vlight[*MHE*: Preface & Ch. 1]
+- Our class: *What are we doing?*
+- .mono[R]: Part of our *how* in this class: Install and basics.
+
+## Upcoming
+
+- Learn more .mono[R].
+- Review metrics and building intution for causality and inference.
+- Build momentum.
+
+## Long run
+
+.hi[Goal:] Deepen understandings/intuitions for causality and inference.
+
+---
+
+name: faq2
+
+## FAQ.sub[2]: What is the ideal experiment for this setting?
+
+Describing the *ideal experiment* helps us formulate
+
+- the .pink[exact causal question(s)]
+
+- the dimensions we want to .pink[manipulate]
+
+- the factors we need to .pink[hold constant]
+
+--
+
+🚧 These *ideal experiments* are generally hypothetical, but if you can't describe the ideal, it will probably be hard to come up with data and plausible research designs in real life.
+
+--
+
+Angrist and Pischke call questions without ideal experiments *fundamentally unanswerable questions* (FUQs).
+---
+
+## FAQ.sub[2]: What is the ideal experiment for this setting?
+
+*Examples of potentially answerable questions...*
+
+- **The effect of education on wages:** Randomize scholarships or incentives to remain in school.
+- **Democracy and development:** Arbitrarily assign institutional types to countries as they receive independence.
+- **Environmental cleanups:** Ask EPA to randomly clean toxic sites.
+- **Gun laws:** Randomly assign gun restrictions to jurisdictions.
+
+--
+
+*Examples of challenging questions to answer (potentially unanswerable?)...*
+
+- How does gender affect eventual career paths?
+- What role does race play in one's wages?
+
+---
+
+name: schedule
+
+# Schedule
+
+## Today
+
+- Welcome, check in, [admin](https://github.com/edrubin/EC607S20), and survey
+- Research basics: *Why are we here?* .grey-vlight[*MHE*: Preface & Ch. 1]
+- Our class: *What are we doing?*
+- .mono[R]: Part of our *how* in this class: Install and basics.
+
+## Upcoming
+
+- Learn more .mono[R].
+- Review metrics and building intution for causality and inference.
+- Build momentum.
+
+## Long run
+
+.hi[Goal:] Deepen understandings/intuitions for causality and inference.
+
+---
+
+exclude: true
+
+```{R, generate pdfs, include = F, eval = F}
+pagedown::chrome_print("sample-slide.html", output = "sample-slide.pdf")
+```

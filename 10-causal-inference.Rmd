@@ -1,0 +1,63 @@
+---
+title: Causal Inference
+author: Andrew Heiss^[Andrew Young School of Policy Studies, Georgia State University]
+output: 
+  bookdown::pdf_document2: 
+    toc: yes
+    toc_depth: 3
+    latex_engine: xelatex
+    dev: cairo_pdf
+bibliography: references.bib
+---
+
+\setcounter{section}{9}
+
+# Causal Inference {#causalinference}
+
+*Andrew Heiss*^[E-mail: aheiss\@gsu.edu. Twitter: \@andrewheiss]
+
+
+### Suggested readings {-}
+
+- Elwert, F. (2013). Graphical Causal Models. In S. L. Morgan (Ed.), *Handbook of Causal Analysis for Social Research* (pp. 245--273). Springer.
+
+- Hernán, M. A., & Robbins, J. M. (2020). *Causal Inference: What If*. CRC Press.
+
+- Morgan, S. L., & Winship, C. (2007). *Counterfactuals and Causal Inference: Methods and Principles for Social Research*. Cambridge University Press.
+
+- Pearl, J., Glymour, M., & Jewell, N. P. (2016). *Causal Inference in Statistics: A Primer*. Wiley.
+
+- Pearl, J., & Mackenzie, D. (2018). *The Book of Why: The New Science of Cause and Effect*. Basic Books.
+
+- Rohrer, J. M. (2018). Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data. *Advances in Methods and Practices in Psychological Science*, *1*(1), 27--42.
+
+- Shalizi, C. R. (2019). *Advanced Data Analysis From an Elementary Point of view*. <https://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf>
+
+    + Chapters 19, 20, 21, and 22: "Graphical Causal Models," "Identifying Causal Effects," "Estimating Causal Effects," and "Discovering Causal Structure"
+
+
+
+### Packages you need to install {-}
+
+- `tidyverse`, `ggdag`, `dagitty`, `MatchIt`, `broom`, `texreg`
+
+
+## Introduction
+
+One of the most repeated phrases in any introductory statistics class is the warning that "correlation is not causation." In political science research, though, we are often concerned about the causes of social and political phenomena. Does government spending on education decrease social inequality? Does increased executive power cause regime collapse? Does increased ethnofractionalization cause genocide? Do international development projects reduce poverty or increase health? These are important questions, but using the statistical methods covered in this book, we can only talk about these relationships using associational language. In Chapter 6 we found that education expenditures are associated with increased inequality, and in Chapter 9 we found that increased concentration of executive power is associated with a lower probability of the regime collapsing. Though we were very careful to not use causal language when interpreting these regression coefficients, we are ultimately concerned with causation, especially if we have the ability to influence policy. If a development intervention *causes* improvements in health, it would be valuable to roll it out on a large scale. 
+
+It is easy enough to run a regression that includes two seemingly unrelated variables and find that they are actually significantly correlated. For instance, in the United States, per capita consumption of mozzarella cheese correlates strongly ($r = 0.959$) with the number of civil engineering doctorates awarded (see Figure \@ref(fig:dr-cheese)). Mathematically there is no difference between the strong relationship between cheese consumption and doctoral degrees in civil engineering and the strong relationship between education spending and social inequality. Both relationships are defined by a single number: a regression coefficient. However, the relationship between cheese and degrees does not mean that increased consumption of cheese will create new PhD-holders, nor does it mean that the increasing ranks of civil engineers are causing an uptick in the amount of cheese Americans are eating. We can readily discount this relationship as spurious. 
+
+```{r dr-cheese, echo=FALSE, fig.cap="The high correlation between cheese and civil engineering"}
+knitr::include_graphics("images/dr-cheese.pdf")
+```
+
+We are less likely to call the relationship between education spending and inequality spurious. We did not immediately laugh off the correlation we found in Chapter 6, and there are many published academic papers that investigate the genuine relationship between them. Why? The difference between the plausibility of the two relationships goes beyond statistics. There is no believable causal story linking cheese consumption and doctoral degrees, despite the high correlation between the two. There *is* a believable causal story between inequality and education, since increasing the quality of education enhances the employment opportunities available to students after graduation. 
+
+In this chapter, we present new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. We introduce the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, we can use a set of rules called *do*-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. 
+
+
+## Causation and causal graphs
+
+Unlike correlation, which at its core is simply a mathematical formula, there is no `causation()` function in R. Causation is a question of philosophy and theory, not math. Debates over the definition of causation have been waged for thousands of years—Plato and Aristotle wrote about the metaphysics and components of causal relationships. For the sake of simplicity, in this chapter we will use a fairly universal definition: $X$ can be said to cause $Y$ if:
+

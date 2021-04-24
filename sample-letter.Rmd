@@ -1,0 +1,72 @@
+---
+title: "Sample RMarkdown"
+author: "Your Name^[title, affiliation, email]"
+date: "April 1, 2021"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_caption: true
+link-citations: yes
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+#                       fig.align = "center")
+# options(knitr.table.format = "latex")
+```
+
+
+
+# Introduction
+
+Write introduction aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff.
+
+Our instrumental variable is $Heat_j \times TimeDummy_t$ that is assumed to be uncorrelated with the error term. It implies that $Heat_j \times TimeDummy_t$ does not have a direct impact on the production.
+
+To produce summary statistics, I found `Hmisc::latex` is more usuful than `stargazer` or `xtable`.
+
+
+
+# Background
+
+Write background aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff.
+
+
+
+# Econometric method 
+
+Write method aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff aaa bbb ccc ddd eee fff.
+
+Their main estimation model has two equations: 
+
+$$
+\begin{aligned}
+Y_{ijt} &= \beta_0 + \beta_1 Heat_{jt} + \beta_2 X1_{ijt} +  \beta_3 X2_{j0} \times D_t + \alpha_{2t} + \alpha_{2j} + u_{ijt} \cdots (1)  \\
+\\
+Heat_{jt} &= \gamma_0 + \gamma_1 Latitude_{j} \times D_t + 
+\gamma_2 X1_{ijt} + \gamma_3 X2_{j0} \times D_t + 
+\alpha_{1t} + \alpha_{1j} + \epsilon_{ijt} \cdots (2) \\
+\\
+\end{aligned}
+$$  
+
+where $Y_{ijt}$ indicates dummy variable whether household $i$, in clueter $j$ at time $t$ has XXX. $Heat_{jt}$ is the temperature of the area covered by the forest to the total area of the specific cluster. $u_{ijt}$ and $\epsilon_{ijt}$ are the error terms. Standard errors are clustered at the cluster level. 
+
+
+```{r, warning = FALSE}
+# Install and load packages
+
+if (!require("pacman")) install.packages("pacman")
+library(pacman) 
+
+pacman::p_load(
+  tidyverse, 
+  ggrepel, 
+  ggthemes, 
+  lubridate
+)
+```
