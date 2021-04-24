@@ -167,6 +167,81 @@ $$
 
 ---
 
+Now we can estimate our causal regression
+
+$$
+`\begin{align}
+  \text{Wage}_i = \alpha + \beta_1 \text{Grad}_i + \beta_2 \text{Female}_i + \varepsilon_i
+\end{align}`
+$$
+
+--
+
+`lm(wage ~ grad + female, data = ex_df)`
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Coef. &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; S.E. &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Intercept &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 99.98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1868.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Graduate &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Female &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -25.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -402.64 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+layout: false
+
+# Title 4
+
+We use gapminder data.
+
+
+```r
+library(gapminder)
+dat &lt;- gapminder %&gt;% 
+  group_by(year, continent) %&gt;% 
+  summarise(`Life Expectancy` = mean(lifeExp),
+            Population = sum(as.numeric(pop))) %&gt;% 
+  rename(Year = year, Continent = continent)
+```
+
+---
+
+# Title 5
+
+
+```r
+ggplot(dat, aes(Year, `Life Expectancy`, color = Continent)) +
+  geom_point() + theme_bw()
+```
+
+&lt;img src="sample-slide_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
 exclude: true
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
