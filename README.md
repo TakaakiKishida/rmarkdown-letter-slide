@@ -1,5 +1,5 @@
 ## Sample R Markdown
-## *Last Updated: April 24, 2021*
+### *Last Updated: April 24, 2021*
 
 - abc
 - bbb
