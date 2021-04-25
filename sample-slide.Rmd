@@ -23,7 +23,7 @@ p_load(
   kableExtra, snakecase, janitor,
   data.table, dplyr,
   lubridate, knitr,
-  estimatr, here, magrittr
+  estimatr, here, magrittr, modelsummary
 )
 
 # Define pink color
@@ -193,6 +193,11 @@ ex_df <- tibble(
   wage = 100 - 25 * female + 5 * grad + rnorm(n, sd = 3)
 )
 ```
+
+---
+
+Look at data.
+
 
 ---
 
